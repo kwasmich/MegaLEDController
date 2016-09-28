@@ -315,6 +315,7 @@ static void anim_tick() {
 
 
 static void executeCommand00F7(const uint8_t in_COMMAND) {
+    g_state.diy = 0;
     anim_stop();
 
     switch (in_COMMAND) {
@@ -679,6 +680,7 @@ static void myUARTCallback(const uint8_t in_BYTE) {
             g_state.b = (charToNibble(uart_sequence[5]) << 4) + charToNibble(uart_sequence[6]);
             g_state.w = (charToNibble(uart_sequence[7]) << 4) + charToNibble(uart_sequence[8]);
             g_state.bri = 31;
+            g_state.diy = 0;
             g_state.on = true;
 
             anim_stop();
@@ -711,7 +713,7 @@ static void setup(void) {
     g_state.g = 255;
     g_state.b = 255;
     g_state.w = 255;
-    g_state.bri = 7;
+    g_state.bri = 31;
     g_state.diy = 1;
     g_state.on = true;
 
