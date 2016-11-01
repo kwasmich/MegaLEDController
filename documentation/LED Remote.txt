@@ -1,0 +1,291 @@
+   1018	      8	     86	   1112	    458	TinyLEDStripUART.elf
+   1136	      8	     88	   1232	    4d0	TinyLEDStripUART.elf
+    118              2			USART
+
+
+    560	      0	      2	    562	    232	TinyLEDStripUART.elf
+   1040	      2	     11	   1053	    41d	TinyLEDStripUART.elf
+    480	      2	      9			NEC IR
+
+
+interrupt handler = 20byte
+function-pointer call = 22byte
+
+
+---------------------
+
+
+0000 0000  1111 0111  0010 0000  1101 1111
+
+
+Address: 0x00f7
+
+Command
+-------
+
+0x00ff	Brightness +
+0x807f	Brightness -
+
+0x40bf	Off
+0xc03f	On
+
+0x20df	R
+0xa05f	G
+0x609f	B
+0xe01f	W
+0x10ef	R1
+0x906f	G1
+0x50af	B1
+0x30cf	R2
+0xb04f	G2
+0x708f	B2
+0x08f7	R3
+0x8877	G3
+0x48b7	B3
+0x28d7	R4
+0xa857	G4
+0x6897	B4
+
+0xd02f	Flash	= Jump 3
+0xf00f	Strobe	= R RG G GB B RB (fade)
+0xc837	Fade
+0xe817	Smooth
+
+
+Fade - fade
+RGB
+100
+110
+010
+011
+001
+111
+110
+111
+011
+111
+101
+111
+
+
+smooth - switch
+RGB
+100
+010
+001
+110
+101
+011
+111
+
+
+
+
+
+
+Address: 0x00ff
+
+Command
+-------
+
+0x3ac5	Brightness +	1…8 / 8 DutyCycle
+0xba45	Brightness -
+
+0x827d	Play/Pause
+0x02fd	On/Off
+
+0x1ae5	R	1	0	0
+0x9a65	G	0	1	0
+0xa25d	B	0	0	1
+0x22dd	W	1	1	1
+0x2ad5	R1	1	0.3	0
+0xaa55	G1	0	1	0.53
+0x926d	B1	0.3	0	1
+0x12ed	W1	1	1	0.435
+0x0af5	R2	1	0.53	0
+0x8a75	G2	0	1	0.8
+0xb24d	B2	0.53	0	1
+0x32cd	W2	1	1	0.8
+0x38c7	R3	1	0.8	0
+0xb847	G3	0	0.3	1
+0x7887	B3	0.8	0	1
+0xf807	W3	0.53	1	0.53
+0x18e7	R4	1	1	0
+0x9867	G4	0	0.4333	1
+0x58a7	B4	1	0	1
+0xd827	W4	0.53	0.53	1
+
+0x28d7	R +
+0xa857	G +		54 Logarithmic steps: 1, 0.93, 0.91, 0.81, 
+0x6897	B +
+0x08f7	R -
+0x8877	G -
+0x48b7	B -
+0x30cf	DIY 1
+0xb04f	DIY 2
+0x708f	DIY 3
+0x10ef	DIY 4
+0x906f	DIY 5
+0x50af	DIY 6
+
+0xe817	Speed +
+0xc837	Speed -
+
+0xf00f	Auto	
+0xd02f	Flash	000 RGB
+0x20df	Jump 3	R G B
+0xa05f	Jump 7	R G RG B RB GB RGB
+0x609f	Fade 3	R G B    (6 steps?)
+0xe01f	Fade 7	- RB
+
+
+Fade7
+RGB
+000
+101
+111
+100
+110
+010
+011
+001
+101
+
+
+Auto
+Flash x 5
+Jump3 x 5
+Jump7 x 5
+Fade3 x 5
+Fade7 x 5
+
+
+
+
+20 a0 60 e0
+10 90 50
+30 b0 70
+08 88 48
+28 a8 68
+
+
+0	0	0
+0.3	77	1
+0.434	111	2
+0.53	135	3
+0.8	204	4
+1	255	5
+
+
+
+
+# integer sequence encoding
+R	500	180	0xb4
+G	050	 30	0x1e
+B	005	  5	0x05
+W	555	215	0xd7
+R1	510	186	0xba
+G1	053	 33	0x21
+B1	105	 41	0x29
+W1	552	212	0xd4
+R2	530	198	0xc6
+G2	054	 34	0x22
+B2	305	113	0x71
+W2	554	214	0xd6
+R3	540	204	0xcc
+G3	015	 11	0x0b
+B3	405	149	0x95
+W3	353	141	0x8d
+R4	550	210	0xd2
+G4	025	 17	0x11
+B4	505	185	0xb9
+W4	335	131	0x83
+
+
+
+0	0x00ff	Brightness +
+1	0x08f7	R3
+2	0x10ef	R1
+
+4	0x20df	R
+5	0x28d7	R4
+6	0x30cf	R2
+
+8	0x40bf	Off
+9	0x48b7	B3
+10	0x50af	B1
+
+12	0x609f	B
+13	0x6897	B4
+14	0x708f	B2
+
+16	0x807f	Brightness -
+17	0x8877	G3
+18	0x906f	G1
+
+20	0xa05f	G
+21	0xa857	G4
+22	0xb04f	G2
+
+24	0xc03f	On
+25	0xc837	Fade
+26	0xd02f	Flash	= Jump 3
+
+28	0xe01f	W
+29	0xe817	Smooth
+30	0xf00f	Strobe	= R RG G GB B RB (fade)
+
+
+
+
+
+0	0xff
+1	0xcc
+2	0xba
+3	0xff
+4	0xb4
+5	0xd2
+6	0xc6
+7	0xff
+8	0xff
+9	0x95
+10	0x29
+11	0xff
+12	0x05
+13	0xb9
+14	0x71
+15	0xff
+16	0xff
+17	0x0b
+18	0x21
+19	0xff
+20	0x1e
+21	0x11
+22	0x22
+23	0xff
+24	0xff
+25	0xff
+26	0xff
+27	0xff
+28	0xd7
+29	0xff
+30	0xff
+31	0xff
+
+I
+
+
+
+Byte storage
+------------
+Jump3/Fade3	3
+Strobe		6
+Fade		12
+Smooth		7
+Flash		2
+Jump7		7
+Fade7		8
+Brightness	54
+IntSeqCoding	6
+		--
+		105

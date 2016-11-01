@@ -24,7 +24,7 @@ typedef void uart_callbackFN(const uint8_t in_BYTE);
 
 
 void uart_init(uart_callbackFN *const in_UART_CALLBACK, const uint8_t in_OSCCAL);
-void uart_receive();
+void uart_receive(void);
 
 void uart_putchar(char c);
 uint8_t uart_getchar(void);

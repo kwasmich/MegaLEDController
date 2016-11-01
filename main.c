@@ -720,7 +720,7 @@ static void setup(void) {
     diy_restore();
     updateFromState();
 
-    uart_init(myUARTCallback, 0x71);   //7.352.960 MHz //0x71 //0x53
+    uart_init(myUARTCallback, 0x61);   //7.352.960 MHz //0x71 //0x53
     ir_init(myIRCallback);
 
     sei();

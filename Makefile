@@ -34,10 +34,10 @@ flash: $(EXECUTABLE).hex
 
 
 fuse:
-	@echo "25" > /sys/class/gpio/export
-	@sleep 0.2
-	@echo "out" > /sys/class/gpio/gpio25/direction
-	@echo "1" > /sys/class/gpio/gpio25/value
+	-@echo "25" > /sys/class/gpio/export
+	-@sleep 0.2
+	-@echo "out" > /sys/class/gpio/gpio25/direction
+	-@echo "1" > /sys/class/gpio/gpio25/value
 	sudo avrdude -c linuxspi -P /dev/spidev0.0 -p $(MCU_DUDE) -U lfuse:w:0xA2:m
 	@echo "25" > /sys/class/gpio/export
 	@sleep 0.2

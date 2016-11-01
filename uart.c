@@ -54,7 +54,7 @@ uint8_t uart_getchar(void) {
 }
 
 
-void uart_receive() {
+void uart_receive(void) {
     if (uart_received_flag) {
         uart_received_flag = false;
         uart_callback(uart_received_data);
